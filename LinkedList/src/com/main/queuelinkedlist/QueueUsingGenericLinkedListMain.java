@@ -1,0 +1,53 @@
+package com.main.queuelinkedlist;
+
+import java.util.Scanner;
+
+import com.linkedlist.queue.QueueUsingGenericLinkedList;
+
+public class QueueUsingGenericLinkedListMain {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		QueueUsingGenericLinkedList<Integer> qugll = new QueueUsingGenericLinkedList<Integer>();
+		while(true) {
+			System.out.println("1. Display queue");
+			System.out.println("2. Display reverse queue");
+			System.out.println("3. Push element to queue");
+			System.out.println("4. Pop element from queue");
+			System.out.println("Any other key to exit");
+
+			int choice = sc.nextInt();
+			switch (choice) {
+			case 1:
+				qugll.display();
+				break;
+			case 2:
+				qugll.displayReverse();
+				break;
+			case 3:
+				System.out.println("Enter element: ");
+				QueueUsingGenericLinkedList<Integer>.Node addedNode = qugll.push(sc.nextInt());
+				if(addedNode != null) {
+					System.out.println("Element added: " + addedNode.getData());						
+				} else {
+					System.out.println("Element could not be added in the queue");
+				}
+				break;
+			case 4:
+				System.out.println("Element: ");
+				QueueUsingGenericLinkedList<Integer>.Node removedNode = qugll.pop();
+				if(removedNode != null) {
+					System.out.println("Element removed: " + removedNode.getData());						
+				} else {
+					System.out.println("Element does not exist in the linked list");
+				}
+				break;
+			default:
+				System.out.println("xxx QUEUE USING GENERIC LINKED LIST xxx");
+				System.exit(0);
+			}
+		}
+	}
+
+}
