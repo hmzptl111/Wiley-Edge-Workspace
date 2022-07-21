@@ -1,0 +1,14 @@
+package com.hashtable;
+
+import com.linkedlist.LinkedList;
+
+public class HashTable {
+	private LinkedList[] arr = new LinkedList[10];
+	
+	public void insert(int key) {
+		int result = key % 10;
+		
+		LinkedList ll = arr[result];
+		ll.insert(key);
+	}
+}

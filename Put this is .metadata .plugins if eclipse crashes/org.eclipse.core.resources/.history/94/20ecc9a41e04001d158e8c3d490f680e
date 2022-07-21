@@ -1,0 +1,15 @@
+package com.hashtable;
+
+import com.genericlinkedlist.GenericLinkedList;
+
+public class HashTable {
+	private GenericLinkedList[] headsOfListOfGenericLinkedLists = new GenericLinkedList[10];
+	
+	public void insert(int key) {
+		//division rule (key % size of arr)
+		int result = key % 10;
+		
+		GenericLinkedList<Integer> gll = headsOfListOfGenericLinkedLists[result];
+		gll.insert(key);
+	}
+}

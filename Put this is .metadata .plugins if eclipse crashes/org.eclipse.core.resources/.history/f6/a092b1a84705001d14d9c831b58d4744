@@ -1,0 +1,17 @@
+package com.word;
+
+public class WordsInString {
+	private String[] words;
+ 
+	public WordsInString(String string) {
+		System.out.println(string);
+		words = string.split("[\\s+]{1}");
+		for(String word: words) {
+			System.out.println(word);			
+		}
+	}
+	
+	public String[] getWords() {
+		return words;
+	}
+}

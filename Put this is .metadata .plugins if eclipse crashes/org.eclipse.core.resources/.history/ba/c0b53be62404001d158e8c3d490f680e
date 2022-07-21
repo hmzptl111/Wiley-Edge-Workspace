@@ -1,0 +1,32 @@
+package com.hashtable;
+
+import com.linkedlist.LinkedList;
+//import com.linkedlist.LinkedList.Node;
+
+public class HashTable {
+	private static LinkedList[] headsOfListOfLinkedLists = new LinkedList[10];
+	
+	static {
+		for(int i = 0; i < 10; i++) {
+			headsOfListOfLinkedLists[i] = new LinkedList();
+		}
+	}
+	
+	public void insert(int key) {
+		//division rule (key % size of headsOfListOfLinkedLists)
+		int index = key % 10;
+		
+		LinkedList ll = headsOfListOfLinkedLists[index];
+//		Node node = headsOfListOfLinkedLists[index].getHead();
+		ll.insert(key);
+	}
+	
+	public void display() {
+		for(LinkedList ll: headsOfListOfLinkedLists) {
+			if(ll != null) {
+				ll.display();
+			}
+			System.out.println();
+		}
+	}
+}

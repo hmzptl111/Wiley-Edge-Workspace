@@ -1,0 +1,83 @@
+package com.linkedlist.generic;
+
+public class GenericLinkedList<T> {
+	public class Node {
+		private T data;
+		private Node next, prev;
+		
+		public Node(T data) {
+			super();
+			this.data = data;
+			this.next = null;
+			this.prev = null;
+		}
+		
+		public T getData() {
+			return data;
+		}
+	}
+	Node head;
+	
+	public Node insert(T data) {
+		Node newNode=new Node(data);
+		
+		if(head == null) {
+			head = newNode;
+		} else {
+			Node currentNode = head;
+			while(currentNode.next != null) {
+				currentNode = currentNode.next;
+			}
+			newNode.prev = currentNode;
+			currentNode.next = newNode;
+		}
+		
+		return newNode;
+	}
+	
+	public Node remove(T data) {
+        Node curr = head;
+ 
+        if (curr != null && curr.data == data) {
+            head = curr.next;
+            head.prev = null;
+            return curr;
+        }
+ 
+        while (curr != null && curr.data != data) {
+            curr = curr.next;
+        }
+ 
+        if (curr == null) {
+        	return null;
+        }
+        
+        curr.prev.next = curr.next;
+        curr.next.prev = curr.prev;
+        return curr;
+	}
+	
+	public void display() {
+		Node currentNode = head;
+		
+		while(currentNode != null) {
+			System.out.print("[" + currentNode.data + "] -> ");
+			currentNode = currentNode.next;
+		}
+		System.out.println();
+	}
+	
+	public void displayReverse() {
+		Node currentNode = head;
+		
+		while(currentNode != null && currentNode.next != null) {
+			currentNode = currentNode.next;
+		}
+		
+		while(currentNode != null) {
+			System.out.print("[" + currentNode.data + "] -> ");
+			currentNode = currentNode.prev;
+		}
+		System.out.println();
+	}
+}

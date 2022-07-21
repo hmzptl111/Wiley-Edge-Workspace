@@ -1,0 +1,51 @@
+package com.bst;
+
+public class BinarySearchTree {
+	public class Node {
+		private int key;
+		private Node left, right;
+		
+		public Node(int key) {
+			this.key = key;
+		}
+		
+		public int getKey() {
+			return key;
+		}
+	}
+	private Node root;
+	
+	public Node getRoot() {
+		return root;
+	}
+	
+	private Node insertNode(Node root, int key) {
+		if(root == null) {
+			root = new Node(key);
+		} else if(key < root.key) {
+			root.left = insertNode(root.left, key);
+		} else if(key > root.key) {
+			root.right = insertNode(root.right, key);
+		}
+		
+		//always returns root node of the tree, can be used to traverse subsequently
+		return root;
+	}
+	
+	public void insert(int key) {
+		root = insertNode(root, key);
+	}
+	
+	public void inorderTraversal() {
+		inorder(root);
+		System.out.println();
+	}
+	
+	public void inorder(Node root) {
+		if(root != null) {
+			inorder(root.left);
+			System.out.print(root.key + " ");
+			inorder(root.right);
+		}
+	}
+}

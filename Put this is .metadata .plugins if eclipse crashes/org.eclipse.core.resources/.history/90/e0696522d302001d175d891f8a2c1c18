@@ -1,0 +1,142 @@
+package com.database;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Optional;
+
+import com.bean.Employee;
+import com.bean.Project;
+
+public class EmployeeProjectDataSource {
+	private static HashMap<Project, HashSet<Employee>> employeeProjects = new HashMap<Project, HashSet<Employee>>();
+	
+	static {
+		for(Project project: ProjectDataSource.getProjects()) {
+			employeeProjects.put(project, null);
+		}
+		assignEmployeeToProjectById(1, 101);
+		assignEmployeeToProjectById(2, 102);
+		assignEmployeeToProjectById(3, 103);
+	}
+	
+	public static Optional<HashMap<Project, HashSet<Employee>>> getEmployeeProjects() {
+		return Optional.ofNullable(employeeProjects);
+	}
+	
+	public static boolean assignEmployeeToProjectById(int eId, int pId) {
+		//project does not exist, return false
+		if(ProjectDataSource.getProjectById(pId).isEmpty()) return false;
+		
+		//employee does not exist, return false
+		if(EmployeeDataSource.getEmployeeById(eId).isEmpty()) return false;
+		
+		//employee already assigned to project, return false
+		if(searchProjectByEmployeeId(eId).isPresent()) return false;
+		
+		//employee capacity for project exceeded, return false
+		if(/*countEmployeesInProject(pId) == -1 || */countEmployeesInProject(pId) >= Project.EMPLOYEES_CAPACITY) return false;
+		
+		Optional<HashSet<Employee>> employeesAssignedToProject = getEmployeesAssignedToProjectById(pId);
+		if(employeesAssignedToProject.isEmpty()) {
+			employeesAssignedToProject = Optional.ofNullable(new HashSet<Employee>());
+		}
+		
+		Optional<Employee> employee = EmployeeDataSource.getEmployeeById(eId);
+		if(employee.isEmpty()) return false;
+		employeesAssignedToProject.get().add(employee.get());
+		
+		HashSet<Employee> employeesAssigned = employeesAssignedToProject.get();
+		Optional<Project> project = ProjectDataSource.getProjectById(pId);
+		if(project.isEmpty()) return false;
+		if(getEmployeeProjects().isEmpty()) return false;
+		employeeProjects.put(project.get(), employeesAssigned);
+		return true;
+	}
+	
+	public static boolean unassignEmployeeFromProjectById(int eId) {
+		//employee does not exist, return false
+		Optional<Employee> employee = EmployeeDataSource.getEmployeeById(eId);
+		if(employee.isEmpty()) return false;
+		
+		//employee not assigned to any project, return false
+		Optional<Project> project = searchProjectByEmployeeId(eId);
+		if(project.isEmpty()) return false;
+		
+		for(Project p: employeeProjects.keySet()) {
+			if(p.equals(project.get())) {
+				Optional<HashSet<Employee>> employees = getEmployeesAssignedToProject(p);
+				employees.get().remove(employee.get());
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean changeEmployeeProject(int eId, int pId) {
+		//project does not exist
+		if(ProjectDataSource.getProjectById(pId) == null) return false;
+		
+		//employee does not exist or is not assigned to any project, return false
+		Optional<Project> project = searchProjectByEmployeeId(eId);
+		if(!project.isPresent()) return false;
+		
+		//changing project to same project
+		if(project.get().getId() == pId) return false;
+		
+		unassignEmployeeFromProjectById(eId);
+		assignEmployeeToProjectById(eId, pId);
+		return true;
+	}
+	
+	public static Optional<HashSet<Employee>> getEmployeesAssignedToProject(Project project) {
+		for(Project p: employeeProjects.keySet()) {
+			if(p.equals(project)) {
+				return Optional.ofNullable(employeeProjects.get(p));
+			}
+		}
+		return Optional.empty();
+	}
+	
+	public static Optional<HashSet<Employee>> getEmployeesAssignedToProjectById(int pId) {
+		for(Project p: employeeProjects.keySet()) {
+			if(p.getId() == pId) {
+				return Optional.ofNullable(employeeProjects.get(p));
+			}
+		}
+		return Optional.empty();
+	}
+	
+	public static int countEmployeesInProject(int pId) {
+		for(Project project: employeeProjects.keySet()) {
+			if(project.getId() == pId) {
+				if(employeeProjects.get(project) != null) {
+					return employeeProjects.get(project).size();					
+				}
+			}
+		}
+		return -1;
+	}
+	
+	public static Optional<Project> searchProjectByEmployeeId(int eId) {
+		for(Project p: employeeProjects.keySet()) {
+			if(employeeProjects.get(p) != null) {
+				for(Employee e: employeeProjects.get(p)) {
+					if(e.getId() == eId) return Optional.ofNullable(p);
+				}				
+			}
+		}
+		return Optional.empty();
+	}
+
+	public static void displayEmployeeProjects() {
+		for(Project project: employeeProjects.keySet()) {
+			System.out.println(project);
+			if(employeeProjects.get(project) != null) {
+				for(Employee employee: employeeProjects.get(project)) {
+					System.out.println(employee);
+				}				
+			}
+			System.out.println();
+		}
+	}
+}

@@ -1,0 +1,24 @@
+package com.main;
+
+//import com.calculate.CalculateImpl;
+//import com.calculate.Factorial;
+
+public class Main {
+
+	public static void main(String[] args) {
+//		CalculateImpl ci = new CalculateImpl();
+//		
+//		int factorial = ci.operate((n) -> {
+//			System.out.println();
+//		});
+		
+		Calculate factorial = (n) -> {
+			for(int i = n; i > 0; i--) {
+				n *= i;
+			}
+			return n;
+		};
+		
+	}
+
+}

@@ -1,0 +1,10 @@
+package com.persistence;
+
+import java.util.List;
+
+import com.bean.Project;
+
+public interface ProjectDao {
+	Optional<Project> searchRecordById(int id);
+	List<Project> getRecords();
+}

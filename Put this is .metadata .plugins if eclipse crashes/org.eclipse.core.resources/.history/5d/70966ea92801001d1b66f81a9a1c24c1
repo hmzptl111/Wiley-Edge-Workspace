@@ -1,0 +1,30 @@
+package com.service;
+
+import com.bean.EmployeeProject;
+import com.bean.Project;
+import com.persistence.EmployeeProjectDaoImpl;
+
+public class EmployeeProjectServiceImpl implements EmployeeProjectService {
+	@Override
+	public boolean assignEmployeeToProject(int eId, int pId) {
+		EmployeeProjectDaoImpl epdi = new EmployeeProjectDaoImpl();
+		EmployeeProject ep = new EmployeeProject(eId, pId);
+		int employeeCapacity = Project.EMPLOYEES_CAPACITY;
+		
+		return epdi.assignEmployeeToProject(ep, employeeCapacity);
+	}
+
+//	@Override
+//	public boolean unassignEmployeeToProject(int eId) {
+//		EmployeeProjectDaoImpl epdi = new EmployeeProjectDaoImpl();
+//		
+//		return epdi.unassignEmployeeFromProject(eId);	
+//	}
+//
+//	@Override
+//	public boolean changeEmployeeProject(int eId, int pId) {
+//		EmployeeProjectDaoImpl epdi = new EmployeeProjectDaoImpl();
+//		
+//		return epdi.changeEmployeeProject(eId, pId);
+//	}
+}

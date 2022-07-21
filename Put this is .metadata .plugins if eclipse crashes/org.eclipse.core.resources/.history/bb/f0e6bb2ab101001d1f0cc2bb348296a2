@@ -1,0 +1,16 @@
+package com.test;
+
+
+public class Test {
+	
+	static class InnerTest extends AnotherTest {
+		public void callAnotherTest() {
+			super.anotherTest();
+		}
+	}
+	
+	public static void main(String[] args) {
+		Test.InnerTest it = new Test.InnerTest();
+		it.callAnotherTest();
+	}
+}

@@ -1,0 +1,11 @@
+package com.calculate;
+
+public class Reverse implements Calculate {
+
+	@Override
+	public boolean operation(int n) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

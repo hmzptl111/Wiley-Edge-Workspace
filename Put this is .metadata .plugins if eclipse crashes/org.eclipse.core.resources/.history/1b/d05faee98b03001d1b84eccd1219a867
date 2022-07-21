@@ -1,0 +1,30 @@
+package com.main;
+
+import java.util.Scanner;
+
+import com.linkedlist.generic.GenericLinkedList;
+
+
+public class GenericLinkedListMain {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		GenericLinkedList<Integer> genericlinkedList = new GenericLinkedList<Integer>();
+		
+		System.out.println("No of elements:");
+		int n = sc.nextInt();
+		for(int i = 0; i < n; i++) {
+			System.out.println("Element " + (i + 1) + ": ");
+			genericlinkedList.insert(sc.nextInt());
+		}
+		
+		genericlinkedList.displayList();
+		
+		System.out.println("\nElement to delete: ");
+		
+		genericlinkedList.delete(sc.nextInt());
+		genericlinkedList.displayList();
+	}
+
+}

@@ -1,0 +1,31 @@
+package com.file.input;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ReadFile {
+	private FileInputStream fileInputStream;
+	private String content;
+	
+	public ReadFile(String fileName) throws IOException {
+		fileInputStream = new FileInputStream(fileName);
+		content = readFileContentAsString();
+	}
+
+	public String getContent() {
+		return content;
+	}
+	
+	private String readFileContentAsString() throws IOException {
+		List<Character> characters = new ArrayList<>();
+		int character;
+		while((character = fileInputStream.read()) != -1) {
+			characters.add((char)character);
+		}
+		
+		System.out.println(characters.toString());
+		return characters.toString();
+	}
+}

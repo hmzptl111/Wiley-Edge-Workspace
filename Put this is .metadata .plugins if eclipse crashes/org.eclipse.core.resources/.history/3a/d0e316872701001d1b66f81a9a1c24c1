@@ -1,0 +1,8 @@
+package com.service;
+
+import com.bean.Employee;
+
+public interface EmployeeService {
+	Employee searchEmployeeById(int id);
+	List<Employee> getEmployees();
+}

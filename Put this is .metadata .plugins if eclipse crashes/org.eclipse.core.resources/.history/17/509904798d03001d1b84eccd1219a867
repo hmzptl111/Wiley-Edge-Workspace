@@ -1,0 +1,61 @@
+package com.linkedlist.generic;
+
+
+public class GenericLinkedList<T> {
+	class Node {
+		T data;
+		Node next;
+		public Node(T data) {
+			super();
+			this.data = data;
+			this.next = null;
+		}
+	}
+	Node head;
+	
+	public Node insert(T data) {
+		Node newNode=new Node(data);
+		
+		if(head == null) {
+			head=newNode;
+		} else {
+			Node last = head;
+			while(last.next != null) {
+				last=last.next;
+			}
+			last.next=newNode;
+		}
+		
+		return newNode;
+	}
+	
+	public Node remove(T data) {
+        Node curr = head, prev = null;
+ 
+        if (curr != null && curr.data == data) {
+            head = curr.next;
+            return curr;
+        }
+ 
+        while (curr != null && curr.data != data) {
+            prev = curr;
+            curr = curr.next;
+        }
+ 
+        if (curr == null) {
+        	return null;
+        }
+ 
+        prev.next = curr.next;
+        return curr;
+	}
+	
+	public void display() {
+		Node currentNode = head;
+		
+		while(currentNode != null) {
+			System.out.print(currentNode.data + " ");
+			currentNode=currentNode.next;
+		}
+	}
+}

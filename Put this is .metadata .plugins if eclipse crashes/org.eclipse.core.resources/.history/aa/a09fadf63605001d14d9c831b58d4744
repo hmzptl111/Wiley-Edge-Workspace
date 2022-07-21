@@ -1,0 +1,53 @@
+package com.main.circularlinkedlist;
+
+import java.util.Scanner;
+
+import com.linkedlist.circular.CircularLinkedList;
+import com.linkedlist.circular.CircularLinkedList.Node;
+
+public class CircularLinkedListMain {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		CircularLinkedList cll = new CircularLinkedList();
+		while(true) {
+			System.out.println("1. Display circular linked list");
+			System.out.println("2. Add element to circular linked list");
+			System.out.println("3. Remove element from circular linked list");
+			System.out.println("Press any other key to exit");
+			
+			int choice = sc.nextInt();
+			switch(choice) {
+			case 1:
+				cll.display();
+				break;
+			case 2:
+				System.out.println("Element: ");
+				int toAdd = sc.nextInt();
+				System.out.println("Before: ");
+				int toAddAfter = sc.nextInt();
+				Node addedNode = cll.insertBefore(toAdd, toAddAfter);
+				if(addedNode != null) {
+					System.out.println("Element added: " + addedNode.getData());
+				} else {
+					System.out.println("Node not found, added at the front of linked list");
+//					System.out.println("Couldn't add node");
+				}
+				break;
+			case 3:
+				System.out.println("Element: ");
+				Node removedNode = cll.remove(sc.nextInt());
+				if(removedNode != null) {
+					System.out.println("Element removed: " + removedNode.getData());
+				} else {
+					System.out.println("Node doesn't exist");
+				}
+				break;
+			default:
+				System.out.println("xxx DOUBLY LINKED LIST xxx");
+				System.exit(0);
+			}	
+		}
+	}
+}

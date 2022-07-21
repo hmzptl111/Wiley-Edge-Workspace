@@ -1,0 +1,140 @@
+package com.database;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Optional;
+
+import com.bean.Employee;
+import com.bean.Project;
+
+public class EmployeeProjectDataSource {
+	private static HashMap<Project, HashSet<Employee>> employeeProjects = new HashMap<Project, HashSet<Employee>>();
+	
+	static {
+		for(Project project: ProjectDataSource.getProjects()) {
+			employeeProjects.put(project, null);
+		}
+	}
+	
+	public static HashMap<Project, HashSet<Employee>> getEmployeeProjects() {
+		return employeeProjects;
+	}
+	
+	public static boolean assignEmployeeToProjectById(int eId, int pId) {
+		//project does not exist, return false
+		if(!ProjectDataSource.getProjectById(pId).isPresent()) return false;
+		
+//		if(ProjectDataSource.getProjectById(pId) == null) return false;
+		//employee does not exist, return false
+		if(EmployeeDataSource.getEmployeeById(eId) == null) return false;
+		//employee already assigned to project, return false
+		if(searchProjectByEmployeeId(eId) != null) return false;
+		//employee capacity for project exceeded, return false
+		if(/*countEmployeesInProject(pId) == -1 || */countEmployeesInProject(pId) >= Project.EMPLOYEES_CAPACITY) return false;
+		
+		HashSet<Employee> employeesAssignedToProject = getEmployeesAssignedToProjectById(pId);
+		if(employeesAssignedToProject == null) {
+			employeesAssignedToProject = new HashSet<Employee>();
+		}
+		Optional<Employee> employee = EmployeeDataSource.getEmployeeById(eId);
+		if(employee.isPresent()) {
+			employeesAssignedToProject.add(employee.get());
+		}
+		
+		
+		HashSet<Employee> employeesAssigned = employeesAssignedToProject;
+		ProjectDataSource.getProjectById(pId).ifPresent(project -> {
+			employeeProjects.put(project, employeesAssigned);
+		});
+		
+//		Project project = ProjectDataSource.getProjectById(pId);
+//		employeeProjects.put(project, employeesAssignedToProject);
+		return true;
+	}
+	
+	public static boolean unassignEmployeeFromProjectById(int eId) {
+		//employee does not exist, return false
+		Optional<Employee> employee = EmployeeDataSource.getEmployeeById(eId);
+		if(employee == null) return false;
+		//employee not assigned to any project, return false
+		Project project = searchProjectByEmployeeId(eId);
+		if(project == null) return false;
+		
+		for(Project p: employeeProjects.keySet()) {
+			if(p.equals(project)) {
+				HashSet<Employee> employees = getEmployeesAssignedToProject(p);
+				employees.remove(employee);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public static boolean changeEmployeeProject(int eId, int pId) {
+		//project does not exist
+		if(ProjectDataSource.getProjectById(pId) == null) return false;
+		//employee does not exist or is not assigned to any project, return false
+		Project project = searchProjectByEmployeeId(eId);
+		if(project == null) return false;
+		//changing project to same project
+		if(project.getId() == pId) return false;
+		
+		unassignEmployeeFromProjectById(eId);
+		assignEmployeeToProjectById(eId, pId);
+		
+		return true;
+	}
+	
+	public static HashSet<Employee> getEmployeesAssignedToProject(Project project) {
+		for(Project p: employeeProjects.keySet()) {
+			if(p.equals(project)) {
+				return employeeProjects.get(p);
+			}
+		}
+		return null;
+	}
+	
+	public static HashSet<Employee> getEmployeesAssignedToProjectById(int pId) {
+		for(Project p: employeeProjects.keySet()) {
+			if(p.getId() == pId) {
+				return employeeProjects.get(p);
+			}
+		}
+		return null;
+	}
+	
+	public static int countEmployeesInProject(int pId) {
+		for(Project project: employeeProjects.keySet()) {
+			if(project.getId() == pId) {
+				if(employeeProjects.get(project) != null) {
+					return employeeProjects.get(project).size();					
+				}
+			}
+		}
+		return -1;
+	}
+	
+	public static Project searchProjectByEmployeeId(int eId) {
+		for(Project p: employeeProjects.keySet()) {
+			if(employeeProjects.get(p) != null) {
+				for(Employee e: employeeProjects.get(p)) {
+					if(e.getId() == eId) return p;
+				}				
+			}
+		}
+		return null;
+	}
+
+	public static void displayEmployeeProjects() {
+		for(Project project: employeeProjects.keySet()) {
+			System.out.println(project);
+			if(employeeProjects.get(project) != null) {
+				for(Employee employee: employeeProjects.get(project)) {
+					System.out.println(employee);
+				}				
+			}
+			System.out.println();
+		}
+	}
+}

@@ -1,0 +1,40 @@
+package com.main;
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.bean.Employee;
+import com.bean.Project;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Map<Employee, Project> ep = new HashMap<>();
+		
+		Employee e1 = new Employee(1, "hamza");
+		Project p1 = new Project(101, "java");
+		
+		Employee e2 = new Employee(2, "patel");
+		Project p2 = new Project(102, "python");
+
+//		Employee e3 = e1;
+		Employee e3 = new Employee(1, "hamza");
+		Project p3 = new Project(103, "sql");
+		
+		ep.put(e1, p1);
+		ep.put(e2, p2);
+		ep.put(e3, p3);
+		
+//			if(e1.equals(e2)) {
+//				System.out.println("e1 = e2");
+//			} else {
+//				System.out.println("e1 != e2");
+//			}	
+		for(Employee key: ep.keySet()) {
+			System.out.println(key + " : " + key.getId() + " - " + key.getName());
+		}
+		
+	}
+
+}

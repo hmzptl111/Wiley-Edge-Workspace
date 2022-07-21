@@ -1,0 +1,7 @@
+//package com.calculate;
+//
+//public class CalculateImpl {
+//	public int operate(int n) {
+//		return calculate.operation(n);
+//	}
+//}

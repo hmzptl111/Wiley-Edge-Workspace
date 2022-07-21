@@ -1,0 +1,72 @@
+package com.linkedlist.sorted;
+
+public class SortedLinkedList {
+	public static class Node {
+		private int data;
+		private Node next;
+
+		public Node(int data) {
+			this.data = data;
+			this.next = null;
+		}
+		
+		public int getData() {
+			return data;
+		}
+	}
+	private Node head;
+	
+	public Node insert(int data) {
+		Node newNode = new Node(data);
+		Node currentNode = head;
+		Node previousNode = null;
+		
+		while(currentNode != null && data > currentNode.data) {
+			previousNode = currentNode;
+			currentNode = currentNode.next;
+		}
+		
+		if(previousNode == null) {
+			head = newNode;
+		} else {
+			previousNode.next = newNode;
+		}
+		newNode.next = currentNode;
+		return newNode;
+	}
+	
+	public Node remove(int data) {
+		Node currentNode = head;
+		Node previousNode = null;
+		
+		while(currentNode != null && data != currentNode.data) {
+			previousNode = currentNode;
+			currentNode = currentNode.next;
+		}
+		
+		if(currentNode != null) {
+			if(previousNode != null) {
+				previousNode.next = currentNode.next;				
+			} else {
+				if(currentNode.next != null) {
+					head = currentNode.next;
+				} else {
+					head = null;
+				}
+			}
+			return currentNode;
+		}
+		
+		return null;
+	}
+	
+	public void display() {
+		Node currentNode = head;
+		
+		while(currentNode != null) {
+			System.out.print("[" + currentNode.data + "] -> ");
+			currentNode = currentNode.next;
+		}
+		System.out.println();
+	}
+}

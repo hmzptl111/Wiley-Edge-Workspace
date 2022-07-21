@@ -1,0 +1,9 @@
+//package com.service;
+//
+//public interface EmployeeProjectService {
+//	boolean assignEmployeeToProject(int eId, int pId);
+//	
+//	boolean unassignEmployeeToProject(int eId);
+//	
+//	boolean changeEmployeeProject(int eId, int pId);
+//}

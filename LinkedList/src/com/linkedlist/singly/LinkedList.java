@@ -29,17 +29,17 @@ public class LinkedList {
 	public void delete(int data) {
         Node curr = head, prev = null;
  
-        if (curr != null && curr.data == data) {
+        if(curr != null && curr.data == data) {
             head = curr.next;
             return;
         }
  
-        while (curr != null && curr.data != data) {
+        while(curr != null && curr.data != data) {
             prev = curr;
             curr = curr.next;
         }
  
-        if (curr == null)
+        if(curr == null)
             return;
  
         prev.next = curr.next;

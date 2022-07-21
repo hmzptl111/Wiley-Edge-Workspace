@@ -1,0 +1,33 @@
+package com.main;
+
+import java.util.Scanner;
+
+import com.linkedlist.SortedGenericLinkedList;
+
+public class SortedGenericLinkedListMain {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		SortedGenericLinkedList<Integer> sgll = new SortedGenericLinkedList<Integer>();
+		while(true) {
+			System.out.println("1. Display linked list");
+			System.out.println("2. Add element to linked list");
+			System.out.println("Any other key to exit");
+			
+			switch(sc.nextInt()) {
+				case 1:
+					sgll.display();
+					break;
+				case 2:
+					System.out.println("Element: ");
+					int data = sc.nextInt();
+					SortedGenericLinkedList.Node insertedElement = sgll.insert(data);
+					break;
+				default:
+					System.out.println("xxx SORTED GENERIC LINKED LIST xxx");
+			}
+		}
+	}
+
+}

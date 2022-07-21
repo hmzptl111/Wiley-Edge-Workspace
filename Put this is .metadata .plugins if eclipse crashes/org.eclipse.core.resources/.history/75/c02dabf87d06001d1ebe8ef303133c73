@@ -1,0 +1,18 @@
+package com.test;
+
+class PQR {
+	public static void call() {
+		System.out.println("pqr");
+	}
+}
+
+public class Test extends PQR {
+	public static void call() {
+		call();
+		System.out.println("abc");
+	}
+	
+	public static void main(String[] args) {
+		call();
+	}
+}

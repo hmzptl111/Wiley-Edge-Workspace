@@ -1,0 +1,37 @@
+package com.main;
+
+import com.calculate.Calculate;
+
+//import com.calculate.CalculateImpl;
+//import com.calculate.Factorial;
+
+public class Main {
+
+	public static void main(String[] args) {
+//		CalculateImpl ci = new CalculateImpl();
+//		
+//		int factorial = ci.operate((n) -> {
+//			System.out.println();
+//		});
+		
+		Calculate factorial = (n) -> {
+			for(int i = n; i > 0; i--) {
+				n *= i;
+			}
+			return n;
+		};
+		
+		Calculate reverse = (n) -> {
+			int r = 0;
+			while(n > 0) {
+				r = (r * 10) + n % 10;
+				n /= 10;
+			}
+			return r;
+		};
+		
+		System.out.println(factorial.operation(5));
+		System.out.println(reverse.operation(1234));
+	}
+
+}

@@ -1,0 +1,48 @@
+package com.main;
+
+import java.util.Scanner;
+
+import com.bst.BinarySearchTree;
+
+public class BinarySearchTreeMain {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		BinarySearchTree bst = new BinarySearchTree();
+		
+		while(true) {
+			System.out.println("1. Display binary search tree");
+			System.out.println("2. Add element to binary search tree");
+			System.out.println("3. Remove element from binary search tree");
+			System.out.println("Any other key to exit");
+			
+			switch(sc.nextInt()) {
+				case 1:
+					bst.display();
+					break;
+				case 2:
+					System.out.println("Element: ");
+					Node addedNode = bst.insert(sc.nextInt());
+					if(addedNode != null) {
+						System.out.println("Element added: " + addedNode.getData());						
+					} else {
+						System.out.println("Element could not be added in the linked list");
+					}
+					break;
+				case 3:
+					System.out.println("Element: ");
+					Node removedNode = bst.remove(sc.nextInt());
+					if(removedNode != null) {
+						System.out.println("Element removed: " + removedNode.getData());						
+					} else {
+						System.out.println("Element does not exist in the linked list");
+					}
+					break;
+				default:
+					System.out.println("xxx SORTED GENERIC LINKED LIST xxx");
+					System.exit(0);
+			}
+		}
+	}
+
+}

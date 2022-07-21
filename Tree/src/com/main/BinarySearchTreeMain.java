@@ -20,6 +20,8 @@ public class BinarySearchTreeMain {
 			System.out.println("6. Add element to binary search tree");
 			System.out.println("7. Remove element from binary search tree");
 			System.out.println("8. Number of leaf nodes");
+			System.out.println("9. Number of internal nodes");
+			System.out.println("10. Height of binary search tree");
 			System.out.println("Any other key to exit");
 			
 			switch(sc.nextInt()) {
@@ -50,7 +52,15 @@ public class BinarySearchTreeMain {
 					break;
 				case 8:
 					int leafNodes = bst.countLeaves();
-					System.out.println("There are " + leafNodes + " leaf nodes in binary search tree");
+					System.out.println("There are " + leafNodes + " leaf nodes in the binary search tree");
+					break;
+				case 9:
+					int internalNodes = bst.countInternalNodes();
+					System.out.println("There are " + internalNodes + " internal nodes in the binary search tree");
+					break;
+				case 10:
+					int height = bst.getHeight();
+					System.out.println("Height of the binary search tree is " + height);
 					break;
 				default:
 					System.out.println("xxx BINARY SEARCH TREE xxx");
@@ -58,5 +68,4 @@ public class BinarySearchTreeMain {
 			}
 		}
 	}
-
 }

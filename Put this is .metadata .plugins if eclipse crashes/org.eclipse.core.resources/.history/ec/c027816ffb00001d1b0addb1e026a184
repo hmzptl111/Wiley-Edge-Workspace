@@ -1,0 +1,62 @@
+package com.sujata.database;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sujata.bean.Employee;
+
+public class EmployeeDataSource {
+
+//	private static Employee[] employeeList=new Employee[10];
+	private static List<Employee> employeeList = new ArrayList<>();
+	private static int length = 0;
+	
+	static {
+		addEmployee(new Employee(101, "AAAA", "Associate", "IT", 35000));
+		addEmployee(new Employee(102, "BBBBB", "Executive", "Sales", 15000));
+		addEmployee(new Employee(103, "CCCC", "Manager", "Sales", 95000));
+		addEmployee(new Employee(104, "DDDD", "Sr. Manager", "IT", 175000));
+	}
+	
+	public static List<Employee> getEmployeeList() {
+		return employeeList;
+	}
+	public static void setEmployeeList(List<Employee> employeeList) {
+		EmployeeDataSource.employeeList = employeeList;
+	}
+
+	public static boolean addEmployee(Employee employee) {
+		employeeList.add(employee);
+		return true;
+//		if(employeeList.length > length) {
+//			employeeList[length] = employee;
+//			length++;
+//			return true;			
+//		}
+//		return false;
+	}
+	
+	public static boolean deleteEmployee(int empId) {
+		for(Employee employee: employeeList) {
+			if(employee.getEmpId() == empId) {
+				employeeList.remove(employee);				
+			}
+		}
+		return true;
+//		for(int i = 0; i < length; i++) {
+//			if(employeeList[i].getEmpId() == empId) {
+//				System.out.println("Found");
+//				for(int j = i; j < length; j++) {
+//					employeeList[j] = employeeList[j + 1];
+//				}
+//				length--;
+//				return true;
+//			}
+//		}
+//		return false;
+	}
+	
+	public int getLength() {
+		return length;
+	}
+}

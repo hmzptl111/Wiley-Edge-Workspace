@@ -1,0 +1,43 @@
+package com.database;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bean.Employee;
+
+public class EmployeeDataSource {
+	private static List<Employee> employees = new ArrayList<Employee>();
+	
+	static {
+		employees.add(new Employee(1, "Dwight Schrute", "Asst. to the Regional Manager", "Sales", 50000));
+		employees.add(new Employee(2, "Michael Scott", "Regional Manager", "Sales", 60000));
+		employees.add(new Employee(3, "Chandler Bing", "Junior Advertising Copywriter", "IT", 120000));
+		employees.add(new Employee(4, "Joey Tribbiani", "Actor", "Acting", 90000));
+		employees.add(new Employee(5, "Peter Griffin", "Safety Inspector", "Brewery", 20000));
+		employees.add(new Employee(6, "Stewie Griffin", "Mastermind", "Genius", 40000));
+		employees.add(new Employee(7, "Georges St. Pierre", "MMA Fighter", "UFC", 200000));
+	}
+	
+	public static List<Employee> getEmployees() {
+		return employees;
+	}
+	
+	public static Employee getEmployeeById(int id) {
+		for(Employee employee: employees) {
+			if(employee.getId() == id) return employee;
+		}
+		return null;
+	}
+	
+	public static Employee getEmployee(Employee employee) {
+		for(Employee e: employees) {
+			if(e.equals(employee)) return e;
+		}
+		return null;
+	}
+	
+	public static boolean addEmployee(Employee employee) {
+		employees.add(employee);
+		return true;
+	}
+}

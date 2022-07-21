@@ -1,0 +1,30 @@
+package com.test;
+
+import java.util.Scanner;
+
+public class Test {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int r = sc.nextInt();
+		int c = sc.nextInt();
+		sc.close();
+		
+		int[][] adults = new int[r][c];
+		for(int i = 0; i < r; i++) {
+			for(int j = 0; j < c; j++) {
+				int age = sc.nextInt();
+				if(age > 18 && age <= 60) {
+					adults[i][j] = 1;
+				} else {
+					adults[i][j] = 0;
+				}
+			}
+		}
+		
+		for(int i = 0; i < r; i++) {
+			for(int j = 0; j < c; j++) {
+				System.out.println(adults[i][j]);
+			}
+		}
+	}
+}

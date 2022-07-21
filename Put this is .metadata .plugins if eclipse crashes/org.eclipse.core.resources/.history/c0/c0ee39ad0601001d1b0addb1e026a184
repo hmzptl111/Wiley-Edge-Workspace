@@ -1,0 +1,18 @@
+package com.main;
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.bean.Employee;
+import com.bean.Project;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Map<Employee, Project> ep = new HashMap<>();
+		
+		
+	}
+
+}

@@ -1,0 +1,14 @@
+package com.hashtable;
+
+import com.genericlinkedlist.GenericLinkedList;
+
+public class HashTable {
+	private GenericLinkedList[] arr = new GenericLinkedList[10];
+	
+	public void insert(int key) {
+		int result = key % 10;
+		
+		GenericLinkedList<Integer> ll = arr[result];
+		ll.insert(key);
+	}
+}

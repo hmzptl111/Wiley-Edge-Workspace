@@ -1,0 +1,34 @@
+package com.main;
+
+import com.graph.Graph;
+
+public class GraphMain {
+
+	public static void main(String[] args) {
+		Graph graph=new Graph();
+		
+		graph.addNewEdge("Delhi", "Mumbai", true);
+		graph.addNewEdge("Delhi", "Indore", true);
+		graph.addNewEdge("Delhi", "Patna", true);
+		graph.addNewEdge("Delhi", "Chennai", true);
+		
+		graph.addNewEdge("Indore", "Chennai", true);
+		graph.addNewEdge("Indore", "Mumbai", true);
+		
+		graph.addNewEdge("Chennai", "Patna", true);
+		
+		System.out.println(graph);
+		
+		int nVertices = graph.getNumberOfVertices();
+		System.out.println(nVertices);
+		
+		String city = "Delhi";
+		System.out.println(city + " is connected to " + graph.getNumberOfEdges(city) + " cities");
+		
+		System.out.println(city + " is connected to the following cities:");
+		for(String connectedCity: graph.getEdges(city)) {
+			System.out.print(connectedCity + " ");
+		}
+		System.out.println();
+	}
+}

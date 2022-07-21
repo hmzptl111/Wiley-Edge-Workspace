@@ -1,0 +1,13 @@
+package com.word;
+
+public class WordsInString {
+	private String[] words;
+ 
+	public WordsInString(String string) {
+		words = string.split("[\\W]+");
+	}
+	
+	public String[] getWords() {
+		return words;
+	}
+}

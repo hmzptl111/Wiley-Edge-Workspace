@@ -1,0 +1,25 @@
+//package com.persistence;
+//
+//import com.bean.Employee;
+//import com.bean.EmployeeProject;
+//import com.bean.Project;
+//
+//public interface EmployeeProjectDao {
+//	//return project employee is associated with
+//	Project searchProjectByEmployeeId(int employeeId);
+//	
+//	//return employee associated with a project
+//	Employee searchEmployeeByProjectId(int projectId);
+//	
+//	//return all employees associated with project
+//	Employee[] getAllEmployeesByProjectId(int pId);
+//	
+//	//add employee to project
+//	boolean assignEmployeeToProject(EmployeeProject employeeProject, int employeeCapacity);
+//	
+//	//remove employee from project
+//	boolean unassignEmployeeFromProject(int eId);
+//	
+//	//change employee project
+//	boolean changeEmployeeProject(int eId, int pId);
+//}

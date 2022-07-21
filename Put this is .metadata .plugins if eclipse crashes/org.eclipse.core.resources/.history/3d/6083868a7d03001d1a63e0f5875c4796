@@ -1,0 +1,76 @@
+package com.linkedlist;
+
+public class SortedGenericLinkedList<T> {
+	public static class Node {
+		public int data;
+		public Node next, prev;
+
+		public Node(int data) {
+			this.data = data;
+			this.next = null;
+			this.prev = null;
+		}
+	}
+	public Node head;
+	
+	public Node insert(int data) {
+		Node newNode = new Node(data);
+		
+		if(head == null) {
+			head = newNode;
+		} else {
+			Node currentNode = head;
+			
+			while(currentNode != null) {
+				if(currentNode.next != null) {
+					if(currentNode == head) {
+						if(data < currentNode.data) {
+							head = newNode;
+							newNode.next = currentNode;
+							currentNode.prev = head;
+						} else {
+							head.next = newNode;
+							newNode.prev = head;
+						}
+					} else {
+						if(data < currentNode.data) {
+							currentNode.prev.next = newNode;
+							newNode.prev = currentNode.prev;
+							newNode.next = currentNode;
+							currentNode.prev = newNode;
+						} else {
+							currentNode.next.prev = newNode;
+							newNode.next = currentNode.next;
+							currentNode.next = newNode;
+							newNode.prev = currentNode;
+						}
+					}
+				} else {
+					if(data < currentNode.data) {
+						currentNode.prev.next = newNode;
+						newNode.prev = currentNode.prev;
+						newNode.next = currentNode;
+						currentNode.prev = newNode;
+					} else {
+						System.out.println("10 should reach here");
+						currentNode.next = newNode;
+						newNode.prev = currentNode;
+						break;
+					}
+				}
+			}
+		}
+		
+		return newNode;
+	}
+	
+	public void display() {
+		Node currentNode = head;
+		
+		while(currentNode != null) {
+			System.out.print(currentNode.data + " ");
+			currentNode = currentNode.next;
+		}
+		System.out.println();
+	}
+}

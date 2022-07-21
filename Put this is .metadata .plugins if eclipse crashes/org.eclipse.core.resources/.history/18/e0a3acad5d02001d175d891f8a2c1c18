@@ -1,0 +1,79 @@
+package com.test;
+
+import java.util.Scanner;
+
+public class Test {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int r = sc.nextInt();
+		int c = sc.nextInt();
+		
+		int[][] adults = new int[r][c];
+		for(int i = 0; i < r; i++) {
+			for(int j = 0; j < c; j++) {
+				int age = sc.nextInt();
+				if(age > 18 && age <= 60) {
+					adults[i][j] = 1;
+				} else {
+					adults[i][j] = 0;
+				}
+			}
+		}
+		sc.close();
+		
+		int count = 0;
+		for(int i = 0; i < (r - 1); i++) {
+			for(int j = 0; j < c; j++) {
+				if(adults[i][j] == 1) {
+					if(j == 0) {
+						//first column
+						if(adults[i + 1][j + 1] == 1) {
+							adults[i][j]++;
+							count++;
+						}
+					} else if(j == (c - 1)) {
+						//last column
+						if(adults[i + 1][j - 1] == 1) {
+							adults[i][j]++;
+							count++;
+						}
+					} else {
+						//mid columns
+						if(adults[i + 1][j + 1] == 1) {
+							adults[i][j]++;
+							count++;
+						}
+						if(adults[i + 1][j - 1] == 1) {
+							adults[i][j]++;
+							count++;
+						}
+					}					
+				}
+			}
+		}
+		
+		//for last row
+		for(int i = 0; i < c; i++) {
+			if(adults[r - 1][i] == 1) {
+				if(i == 0) {
+					if(adults[r - 2][i + 1] == 1) {
+						count++;
+					}
+				} else if(i == (c - 1)) {
+					if(adults[r - 2][i - 1] == 1) {
+						count++;
+					}
+				} else {
+					if(adults[r - 2][i + 1] == 1) {
+						count++;
+					}
+					if(adults[r - 2][i - 1] == 1) {
+						count++;
+					}
+				}				
+			}
+		}
+		
+		System.out.println(count);
+	}
+}

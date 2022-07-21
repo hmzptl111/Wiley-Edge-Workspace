@@ -1,0 +1,29 @@
+package com.test;
+
+
+public class Test {
+	private String unacc = "unaccessible";
+	
+	public class Inner {
+		String name = "hamza";
+		
+		public void access() {
+			System.out.println(unacc);
+		}
+	}
+	public static void main(String[] args) {
+		Test test = new Test();
+		Inner inner = test.new Inner();
+		
+		System.out.println(inner.name);
+		inner.access();
+	}
+}
+
+class A {
+	public void acc() {
+		Test t = new Test();
+		Test.Inner i = t.new Inner();
+		i.access();
+	}
+}

@@ -1,0 +1,58 @@
+package com.airport;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class Airports {
+	Map<Airport, List<Map<Airport, Double>>> airports = new HashMap<Airport, List<Map<Airport, Double>>>();
+	public void addAirport(Airport airport) {
+		airports.put(airport, new LinkedList<>());
+	}
+	
+	public void connectAirports(Airport source, Airport destination, double distance, boolean isBidirectional) {
+		if(!airports.containsKey(source)) {
+			addAirport(source);
+		}
+		if(!airports.containsKey(destination)) {
+			addAirport(destination);
+		}
+		
+		Map<Airport, Double> addThisAirport = new HashMap<Airport, Double>();
+		addThisAirport.put(destination, distance);
+		//also, in the list of connected airports, if the airport is already connected, dont connect it again
+		if(airports.get(source).contains(addThisAirport)) {
+			System.out.println("already connected");
+		} else {
+			airports.get(source).add(addThisAirport);			
+		}
+		
+		if(isBidirectional) {
+			Map<Airport, Double> addThisAirportToo = new HashMap<Airport, Double>();
+			addThisAirportToo.put(source, distance);
+			if(airports.get(destination).contains(addThisAirportToo)) {
+				System.out.println("already connected");
+			} else {
+				airports.get(destination).add(addThisAirportToo);
+			}
+		}
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		for(Airport vertex: airports.keySet()) {
+			sb.append(vertex.getName() + ": ");
+			for(Map<Airport, Double> connectedAirports: airports.get(vertex)) {
+				for(Airport connectedAirport: connectedAirports.keySet()) {
+					sb.append(connectedAirport.getName() + " - " + connectedAirports.get(connectedAirport) + ", ");
+				}
+			}
+			sb.append("\n");
+		}
+		
+		return sb.toString();
+	}	
+}

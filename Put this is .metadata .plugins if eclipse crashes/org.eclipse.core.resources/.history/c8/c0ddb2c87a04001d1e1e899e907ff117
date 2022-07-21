@@ -1,0 +1,35 @@
+package com.linkedlist.circular;
+
+
+public class CircularLinkedList {
+	public class Node {
+		private int data;
+		private Node next;
+		
+		public Node(int data) {
+			this.data = data;
+		}
+		
+		public int getData() {
+			return data;
+		}
+	}
+	Node head, last;
+	
+	//insertion at the end
+	public Node insert(int data) {
+		Node newNode = new Node(data);
+		if(head == null && last == null) {
+			head = newNode;
+			last = newNode;
+		} else {
+			last.next = newNode;
+			newNode.next = head;
+		}
+		return newNode;
+	}
+	
+	public Node remove(int data) {
+		
+	}
+}

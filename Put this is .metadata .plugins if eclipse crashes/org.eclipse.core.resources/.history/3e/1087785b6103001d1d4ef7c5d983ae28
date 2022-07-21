@@ -1,0 +1,58 @@
+package com.stack;
+
+public class StackUsingGenericLinkedList<T> {
+	class Node {
+		T data;
+		Node next, prev;
+
+		public Node(T data) {
+			super();
+			this.data = data;
+			this.next = null;
+			this.prev = null;
+		}
+	}
+
+	Node start = null, top = null;
+
+	public void push(T data) {
+		Node newNode = new Node(data);
+
+		if (start == null) {
+			newNode.prev = null;
+			newNode.next = null;
+
+			start = newNode;
+			top = newNode;
+		} else {
+			top.next = newNode;
+			newNode.next = null;
+			newNode.prev = top;
+			top = newNode;
+		}
+	}
+
+	public void pop() {
+		Node temp = top;
+		if (start == null)
+			System.out.println("Stack is empty");
+		else if (top == start) {
+			top = null;
+			start = null;
+			top = null;
+		} else {
+			top.prev.next = null;
+			top = top.prev;
+			top = null;
+		}
+	}
+
+	public void display() {
+		Node currentNode = start;
+		while (currentNode != null) {
+			System.out.print(currentNode.data + " ");
+			currentNode = currentNode.next;
+		}
+		System.out.println();
+	}
+}

@@ -1,0 +1,28 @@
+package com.linkedlist;
+
+
+public class SortedLinkedList<T> {
+	class Node {
+		T data;
+		Node next;
+		public Node(T data) {
+			super();
+			this.data = data;
+			this.next = null;
+		}
+	}
+	Node head;
+	
+	public void insert(T data) {
+		Node newNode = new Node(data);
+		
+		if(head == null) {
+			head = newNode;
+		} else {
+			Node curr = head;
+//			while(newNode.data >= curr.data) {
+//				
+//			}
+		}
+	}
+}

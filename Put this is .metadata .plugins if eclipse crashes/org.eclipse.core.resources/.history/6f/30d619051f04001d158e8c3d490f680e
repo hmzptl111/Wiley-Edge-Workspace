@@ -1,0 +1,15 @@
+package com.hashtable;
+
+import com.genericlinkedlist.LinkedList;
+
+public class HashTable {
+	private LinkedList[] headsOfListOfLinkedLists = new LinkedList[10];
+	
+	public void insert(int key) {
+		//division rule (key % size of headsOfListOfLinkedLists)
+		int index = key % 10;
+		
+		LinkedList ll = headsOfListOfLinkedLists[index];
+		ll.insert(key);
+	}
+}

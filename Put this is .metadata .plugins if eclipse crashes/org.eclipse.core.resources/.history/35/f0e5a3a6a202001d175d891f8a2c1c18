@@ -1,0 +1,46 @@
+package com.main;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.employee.*;
+
+
+public class Main {
+	public static void main(String[] args) {
+		List<Employee> employees = Arrays.asList(new Employee(101, "AAAA", "IT", "Associate", 25000),
+				new Employee(102, "BBBB", "Sales", "Sr. Associate", 50000),
+				new Employee(103, "CCCC", "Marketing", "Associate", 28000),
+				new Employee(104, "DDDD", "HR", "Manager", 125000),
+				new Employee(105, "EEEE", "IT", "Manager", 215000),
+				new Employee(106, "FFFF", "IT", "Associate", 35000));
+		
+		//highest salaried employee
+//		List<Employee> highestSalary = employees.stream()
+//				.sorted((e1, e2) -> {
+//					if(e1.getEmpSalary() > e2.getEmpSalary()) return -1;
+//					else return 1;
+//				})
+//				.limit(2)
+//				.collect(Collectors.toList());
+//				
+//		System.out.println(highestSalary.get(0));
+		
+		//total salary per department
+		Map<String, Double> totalSalaryPerDepartment = employees.stream()
+				.collect(Collectors.groupingBy(Employee::getEmpDepartment, Collectors.summingDouble(Employee::getEmpSalary)));
+		totalSalaryPerDepartment.forEach((dep, sal) -> System.out.println(dep + ": " + sal));
+		
+		//highest salary per designation
+		Map<String, Optional<Employee>> maxSalaryBasedOnDesignation = employees.stream()
+				.collect(Collectors.groupingBy(Employee::getEmpDesignation, Collectors.maxBy(Comparator.comparingDouble(Employee::getEmpSalary))));
+		maxSalaryBasedOnDesignation.forEach((des, sal) -> System.out.println(des + ": " + sal));
+				
+		
+	}
+
+}

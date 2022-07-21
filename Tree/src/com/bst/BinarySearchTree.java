@@ -158,12 +158,28 @@ public class BinarySearchTree {
 	private int countNumberOfInternalNodes(Node root) {
 		if(root == null || (root.left == null && root.right == null)) return 0;
 		
-		if(root.left != null || root.right != null) return 1;
-		
-		return countNumberOfInternalNodes(root.left) + countNumberOfInternalNodes(root.right);
+		return (1 + countNumberOfInternalNodes(root.left) + countNumberOfInternalNodes(root.right));	
 	}
 	
 	public int countInternalNodes() {
 		return countNumberOfInternalNodes(root);
+	}
+	
+	private int getHeightOfTree(Node root) {
+		if(root == null) return 0;
+		
+		int leftSubtreeHeight = 0, rightSubtreeHeight = 0;
+		if(root.left != null) {
+			leftSubtreeHeight = 1 + getHeightOfTree(root.left);
+		}
+		if(root.right != null) {
+			rightSubtreeHeight = 1 + getHeightOfTree(root.right);
+		}
+		
+		return (leftSubtreeHeight >= rightSubtreeHeight) ? leftSubtreeHeight: rightSubtreeHeight;
+	}
+	
+	public int getHeight() {
+		return getHeightOfTree(root);
 	}
 }

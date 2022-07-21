@@ -1,0 +1,96 @@
+package com.test;
+
+import java.util.Scanner;
+
+public class Test {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int r = sc.nextInt();
+		int c = sc.nextInt();
+		
+		int[][] adults = new int[r][c];
+		for(int i = 0; i < r; i++) {
+			for(int j = 0; j < c; j++) {
+				int age = sc.nextInt();
+				if(age > 18 && age <= 60) {
+					adults[i][j] = 1;
+				} else {
+					adults[i][j] = 0;
+				}
+			}
+		}
+		sc.close();
+		
+		for(int i = 0; i < r; i++) {
+			for(int j = 0; j < c; j++) {
+				System.out.print(adults[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+		int count = 0;
+		for(int i = 0; i < (r - 1); i++) {
+			for(int j = 0; j < c; j++) {
+				if(adults[i][j] == 1) {
+					if(j == 0) {
+						//first column
+						if(adults[i + 1][j + 1] == 1) {
+							adults[i][j]++;
+							adults[i + 1][j + 1]++;
+							System.out.println(40);
+							count++;
+						}
+					} else if(j == (c - 1)) {
+						//last column
+						if(adults[i + 1][j - 1] == 1) {
+							adults[i][j]++;
+							adults[i + 1][j - 1]++;
+							System.out.println(48);
+							count++;
+						}
+					} else {
+						//mid columns
+						if(adults[i + 1][j + 1] == 1) {
+							adults[i][j]++;
+							adults[i + 1][j + 1]++;
+							System.out.println(56);
+							count++;
+						}
+						if(adults[i + 1][j - 1] == 1) {
+							adults[i][j]++;
+							adults[i + 1][j - 1]++;
+							System.out.println(62);
+							count++;
+						}
+					}					
+				}
+			}
+		}
+		for(int i = 0; i < c; i++) {
+			if(adults[r - 1][i] == 1) {
+				if(i == 0) {
+					if(adults[r - 2][i + 1] == 1) {
+						System.out.println(73);
+						count++;
+					}
+				} else if(i == (c - 1)) {
+					if(adults[r - 2][i - 1] == 1) {
+						System.out.println(78);
+						count++;
+					}
+				} else {
+					if(adults[r - 2][i + 1] == 1) {
+						System.out.println(83);
+						count++;
+					}
+					if(adults[r - 2][i - 1] == 1) {
+						System.out.println(87);
+						count++;
+					}
+				}				
+			}
+		}
+		
+		System.out.println(count);
+	}
+}

@@ -1,0 +1,51 @@
+package com.stack;
+
+public class StackUsingGenericLinkedList<T> {
+	class Node {
+		T data;
+		Node next, prev;
+		public Node(T data) {
+			super();
+			this.data = data;
+			this.next = null;
+			this.prev = null;
+		}
+	}
+	//addition and deletion happens at head
+	Node head;
+	
+	
+	
+	public void push(T data) {
+		Node newNode = new Node(data);
+		
+		if (isEmpty()) {
+		      n.prev = null;
+		      n.next = null;
+		 
+		      // As it is first node if stack
+		      // is empty
+		      start = n;
+		      top = n;
+		    } else {
+		      top.next = n;
+		      n.next = null;
+		      n.prev = top;
+		      top = n;
+		    }
+	}
+	
+	public void pop() {
+		head = head.prev;
+		
+	}
+	
+	public void display() {
+		Node currentNode = head;
+		while(currentNode != null) {
+			System.out.print(currentNode.data + " ");
+			currentNode = currentNode.next;
+		}
+		System.out.println();
+	}
+}

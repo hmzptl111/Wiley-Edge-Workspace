@@ -1,0 +1,78 @@
+package com.linkedlist.circular;
+
+
+public class CircularLinkedList {
+	public class Node {
+		private int data;
+		private Node next, prev;
+		
+		public Node(int data) {
+			this.data = data;
+		}
+		
+		public int getData() {
+			return data;
+		}
+	}
+	Node first, last;
+	
+	//insertion at the end
+	public Node insert(int data) {
+		Node newNode = new Node(data);
+		if(first == null && last == null) {
+			first = newNode;
+			last = newNode;
+		} else {
+			last.next = newNode;
+			newNode.prev = last;
+			newNode.next = first;
+			last = newNode;
+			first.prev = last;
+		}
+		return newNode;
+	}
+	
+	public Node remove(int data) {
+		if(first == null && last == null) return null;
+		
+		Node currentNode = first;
+		if(first == last) {
+			if(currentNode.data != data) return null;
+			
+			first = null;
+			last = null;
+		} else {
+			while(currentNode != null && currentNode.next != first) {
+				if(currentNode.data != data) {
+					currentNode = currentNode.next;					
+				} else {
+					currentNode.prev.next = currentNode.next;
+					currentNode.next.prev = currentNode.prev;
+					return currentNode;
+				}
+			}
+			
+			if(currentNode == last) {
+				if(currentNode.data != data) {
+					return null;
+				} else {
+					last = currentNode.prev;
+					last.next = first;
+					first.prev = last;
+				}
+			}
+		}
+		
+		return currentNode;
+	}
+	
+	public void display() {
+		Node currentNode = first;
+		while(currentNode != null) {
+			System.out.print(currentNode.data + " ");
+			if(currentNode.next == first) break;
+			currentNode = currentNode.next;
+		}
+		System.out.println();
+	}
+}

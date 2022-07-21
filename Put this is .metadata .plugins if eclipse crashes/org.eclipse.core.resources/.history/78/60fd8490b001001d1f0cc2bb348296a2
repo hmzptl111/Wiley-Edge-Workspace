@@ -1,0 +1,16 @@
+package com.test;
+
+
+public class Test {
+	public static void multiParam(int i, String... j) {
+		System.out.println(i);
+		
+		for(String k: j) {
+			System.out.println(k);
+		}
+	}
+	
+	public static void main(String[] args) {
+		multiParam(100, "hello", "world", "java", "python");
+	}
+}

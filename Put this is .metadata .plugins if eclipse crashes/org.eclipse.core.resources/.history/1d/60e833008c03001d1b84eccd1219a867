@@ -1,0 +1,27 @@
+package com.main.singlylinkedlist;
+
+import java.util.Scanner;
+
+import com.linkedlist.singly.LinkedList;
+
+public class LinkedListMain {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		LinkedList linkedList = new LinkedList();
+		System.out.println("No of elements:");
+		int n = sc.nextInt();
+		for(int i = 0; i < n; i++) {
+			System.out.println("Element " + (i + 1) + ": ");
+			linkedList.insert(sc.nextInt());
+		}
+		
+		linkedList.displayList();
+		
+		System.out.println("\nElement to delete: ");
+		
+		linkedList.delete(sc.nextInt());
+		linkedList.displayList();
+	}
+}

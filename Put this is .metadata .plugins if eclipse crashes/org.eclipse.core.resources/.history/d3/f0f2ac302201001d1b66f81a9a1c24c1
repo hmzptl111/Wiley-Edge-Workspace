@@ -1,0 +1,34 @@
+package com.database;
+
+import com.bean.Project;
+
+public class ProjectDataSource {
+	public final static int LENGTH = 7;
+	private static Project[] projects = new Project[3];
+	
+	static {
+		projects[0] = new Project(101, "ML");
+		projects[1] = new Project(102, "AI");
+		projects[2] = new Project(103, "Web");
+	}
+	
+	public static Project[] getProjects() {
+		return projects;
+	}
+
+	public static Project getProjectById(int pId) {
+		for(Project p: getProjects()) {
+			if(p.getId() == pId) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	public static Project getProject(Project project) {
+		for(Project p: projects) {
+			if(p.equals(project)) return p;
+		}
+		return null;
+	}
+}

@@ -1,0 +1,25 @@
+package com.main;
+
+import java.util.Scanner;
+
+import com.stack.StackUsingGenericLinkedList;
+
+
+public class StackUsingGenericLinkedListMain {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		StackUsingGenericLinkedList<Integer> stackUsingGenericLinkedList = new StackUsingGenericLinkedList<Integer>();
+		System.out.println("No of elements:");
+		int n = sc.nextInt();
+		for(int i = 0; i < n; i++) {
+			System.out.println("Element " + (i + 1) + ": ");
+			stackUsingGenericLinkedList.push(sc.nextInt());
+		}
+		
+		stackUsingGenericLinkedList.display();
+		stackUsingGenericLinkedList.pop();
+		stackUsingGenericLinkedList.display();
+	}
+}

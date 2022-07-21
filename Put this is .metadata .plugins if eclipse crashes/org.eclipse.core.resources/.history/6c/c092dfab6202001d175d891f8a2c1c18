@@ -1,0 +1,5 @@
+package com.calculate;
+
+public interface Calculate {
+	public int operation(int n);
+}

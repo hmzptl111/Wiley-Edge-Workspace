@@ -1,0 +1,10 @@
+package com.linkedlist.reversegeneric;
+
+import com.linkedlist.generic.GenericLinkedList;
+
+public class ReverseGenericLinkedList<T> extends GenericLinkedList<T> {
+	@Override
+	public void display() {
+		System.out.println("this method has been overriden");
+	}
+}

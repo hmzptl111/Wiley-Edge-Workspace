@@ -1,0 +1,28 @@
+package com.airport;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class Airports {
+	Map<Airport, Map<List<Airport>, Double>> airports = new HashMap<Airport, Map<List<Airport>, Double>>();
+	
+//	<Airport1, List<Airport, distance>>
+	public void addAirport(Airport airport) {
+		airports.put(airport, new HashMap<>());
+	}
+	
+	//will implement bidirectional in a bit
+	public void connectAirports(Airport source, Airport destination, double distance) {
+		if(!airports.containsKey(source)) {
+			addAirport(source);
+		}
+		if(!airports.containsKey(destination)) {
+			addAirport(destination);
+		}
+//		airports.get(source).add(destination);
+	}
+	
+	
+}

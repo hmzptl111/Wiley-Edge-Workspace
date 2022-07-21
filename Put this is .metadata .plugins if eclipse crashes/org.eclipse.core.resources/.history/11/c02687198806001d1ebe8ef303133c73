@@ -1,0 +1,11 @@
+package com.test;
+
+class PQR {
+	
+}
+
+public class Test extends PQR {
+	public static void main(String[] args) {
+		
+	}
+}

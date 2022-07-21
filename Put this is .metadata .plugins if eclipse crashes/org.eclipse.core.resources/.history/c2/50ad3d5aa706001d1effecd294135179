@@ -1,0 +1,67 @@
+package com.airport;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class Airports {
+	public Map<Airport, List<Map<Airport, Double>>> airports = new HashMap<Airport, List<Map<Airport, Double>>>();
+	public List<Boolean> visitedAirports;
+	
+	public void addAirport(Airport airport) {
+		airports.put(airport, new LinkedList<>());
+		visitedAirports = new ArrayList<>();
+	}
+	
+	public void connectAirports(Airport source, Airport destination, double distance, boolean isBidirectional) {
+		if(!airports.containsKey(source)) {
+			addAirport(source);
+		}
+		if(!airports.containsKey(destination)) {
+			addAirport(destination);
+		}
+		
+		Map<Airport, Double> addThisAirport = new HashMap<Airport, Double>();
+		addThisAirport.put(destination, distance);
+		//connect, only if not already connected
+		if(airports.get(source).contains(addThisAirport)) {
+			System.out.println(source.getName() + " and " + destination.getName() + " are already connected");
+		} else {
+			airports.get(source).add(addThisAirport);			
+		}
+		
+		if(isBidirectional) {
+			Map<Airport, Double> addThisAirportToo = new HashMap<Airport, Double>();
+			addThisAirportToo.put(source, distance);
+			//connect, only if not already connected
+			if(airports.get(destination).contains(addThisAirportToo)) {
+				System.out.println(destination.getName() + " and " + source.getName() + " are already connected");
+			} else {
+				airports.get(destination).add(addThisAirportToo);
+			}
+		}
+	}
+	
+	public void depthFirstSearch() {
+		
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		for(Airport vertex: airports.keySet()) {
+			sb.append(vertex.getName() + ": ");
+			for(Map<Airport, Double> connectedAirports: airports.get(vertex)) {
+				for(Airport connectedAirport: connectedAirports.keySet()) {
+					sb.append(connectedAirport.getName() + " - " + connectedAirports.get(connectedAirport) + ", ");
+				}
+			}
+			sb.append("\n");
+		}
+		
+		return sb.toString();
+	}	
+}

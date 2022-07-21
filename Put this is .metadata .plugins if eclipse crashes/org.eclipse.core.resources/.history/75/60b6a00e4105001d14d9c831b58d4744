@@ -1,0 +1,62 @@
+package com.bst;
+
+public class BST {
+	public class Node {
+		private String word;
+		private int frequency;
+		private Node left, right;
+		
+		public Node(String word) {
+			this.word = word;
+			this.frequency = 1;
+		}
+		
+		public String getWord() {
+			return word;
+		}
+		
+		public int getFrequency() {
+			return frequency;
+		}
+		
+		public void incrementWordFrequency() {
+			frequency += 1;
+		}
+	}
+	Node root;
+	
+	public Node insertWord(Node root, String word) {
+		if(root == null) {
+			root = new Node(word);
+		} else {
+			if(word.compareTo(root.word) < 0) {
+				root.left = insertWord(root.left, word);
+			} else if(word.compareTo(root.word) > 0) {
+				root.right = insertWord(root.right, word);
+			} else {
+				root.incrementWordFrequency();
+				return null;
+			}			
+		}
+		
+		return root;
+	}
+	
+	public Node insert(String word) {
+		return insertWord(root, word);
+	}
+	
+	private void inorder(Node root) {
+		if(root == null) return;
+		
+		inorder(root.left);
+		System.out.print("Word: " + root.word + " - Frequency: " + root.frequency);
+		inorder(root.right);			
+	}
+	
+	public void display() {
+		System.out.println();
+		inorder(root);
+		System.out.println();
+	}
+}

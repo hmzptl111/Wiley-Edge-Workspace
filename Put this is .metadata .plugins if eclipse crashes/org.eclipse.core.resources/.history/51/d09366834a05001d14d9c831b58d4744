@@ -1,0 +1,18 @@
+package com.word;
+
+public class WordsInString {
+	private String[] words;
+ 
+	public WordsInString(String string) {
+		System.out.println(string);
+//		"[\\s\\,\\.\\!\\;\\:]+"
+		words = string.split("[^a-zA-Z0-9_']");
+		for(String word: words) {
+			System.out.println(word);
+		}
+	}
+	
+	public String[] getWords() {
+		return words;
+	}
+}

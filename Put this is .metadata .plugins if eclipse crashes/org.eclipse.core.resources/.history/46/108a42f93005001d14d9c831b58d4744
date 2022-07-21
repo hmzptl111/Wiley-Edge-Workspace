@@ -1,0 +1,119 @@
+package com.linkedlist.circular;
+
+
+public class CircularLinkedList {
+	public class Node {
+		private int data;
+		private Node next, prev;
+		
+		public Node(int data) {
+			this.data = data;
+		}
+		
+		public int getData() {
+			return data;
+		}
+	}
+	Node first, last;
+	
+	//insertion at front
+	public Node insertAtFront(int data) {
+		Node newNode = new Node(data);
+		if(first == null && last == null) {
+			first = newNode;
+			last = newNode;
+		} else {
+			newNode.next = first;
+			first.prev = newNode;
+			last.next = newNode;
+			first = newNode;
+		}
+		return newNode;
+	}
+	
+	//insertion at the end
+	public Node insertAtEnd(int data) {
+		Node newNode = new Node(data);
+		if(first == null && last == null) {
+			first = newNode;
+			last = newNode;
+		} else {
+			last.next = newNode;
+			newNode.prev = last;
+			newNode.next = first;
+			last = newNode;
+			first.prev = last;
+		}
+		return newNode;
+	}
+	
+	//insertion after a particular node
+	public Node insertAfter(int data, int after) {
+		if(first == null && last == null) return null;
+		
+		Node newNode = new Node(data);
+		Node currentNode = first;
+		while(currentNode != null && currentNode.data != after && currentNode.next != first) {
+			currentNode = currentNode.next;
+		}
+		
+		//insert at the end if node not found
+		if(currentNode.next == first && currentNode.data != data) {
+			currentNode.next = newNode;
+			newNode.prev = currentNode;
+			last = newNode;
+			last.next = first;
+		} else {
+			newNode.next = currentNode.next;
+			currentNode.next.prev = newNode;
+			currentNode.next = newNode;
+			newNode.prev = currentNode;			
+		}
+		
+		return newNode;
+	}
+	
+	public Node remove(int data) {
+		if(first == null && last == null) return null;
+		
+		Node currentNode = first;
+		if(first == last) {
+			if(currentNode.data != data) return null;
+			
+			first = null;
+			last = null;
+		} else {
+			while(currentNode != null && currentNode.next != first) {
+				if(currentNode.data != data) {
+					currentNode = currentNode.next;					
+				} else {
+					currentNode.prev.next = currentNode.next;
+					currentNode.next.prev = currentNode.prev;
+					return currentNode;
+				}
+			}
+			
+			if(currentNode == last) {
+				if(currentNode.data != data) {
+					return null;
+				} else {
+					last = currentNode.prev;
+					last.next = first;
+					first.prev = last;
+				}
+			}
+		}
+		
+		return currentNode;
+	}
+	
+	public void display() {
+		Node currentNode = first;
+		while(currentNode != null) {
+			System.out.print(currentNode.data + " ");
+			if(currentNode.next == first) break;
+			currentNode = currentNode.next;
+		}
+		System.out.println();
+	}
+}

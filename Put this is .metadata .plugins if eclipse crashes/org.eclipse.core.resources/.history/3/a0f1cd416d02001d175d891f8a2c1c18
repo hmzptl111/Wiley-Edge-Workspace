@@ -1,0 +1,14 @@
+package com.lamdamethodreference;
+
+import java.util.function.*;
+
+public class LamdaMethodReference {
+
+	public static void main(String[] args) {
+		BiFunction<String, String, Integer> fo = (String s1, String s2) -> s1.compareTo(s2);
+		System.out.println(fo.apply("hamza", "patel"));
+		
+		BiFunction<String, String, Integer> lamda = String::compareTo;
+		System.out.println(lamda.apply("hama", "patel"));
+	}
+}

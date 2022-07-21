@@ -1,0 +1,9 @@
+package com.test;
+
+public class AnotherTest {
+	public int a = 1;
+	
+	public void anotherTest() {
+		System.out.println("another test");
+	}
+}

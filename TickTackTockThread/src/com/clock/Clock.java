@@ -4,7 +4,7 @@ public class Clock {
 	private String name = "tick";
 	
 	synchronized public void tick() {
-		while(name.compareTo("tick") != 0) {
+		while(!name.equals("tick")) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -18,7 +18,7 @@ public class Clock {
 	}
 	
 	synchronized public void tack() {
-		while(name.compareTo("tack") != 0) {
+		while(!name.equals("tack")) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -32,7 +32,7 @@ public class Clock {
 	}
 	
 	synchronized public void tock() {
-		while(name.compareTo("tock") != 0) {
+		while(!name.equals("tock")) {
 			try {
 				wait();
 			} catch (InterruptedException e) {

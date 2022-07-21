@@ -1,0 +1,5 @@
+package com.linkedlist.queue;
+
+public class QueueUsingGenericLinkedList {
+
+}

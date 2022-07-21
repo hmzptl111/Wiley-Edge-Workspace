@@ -1,30 +1,40 @@
 package com.hashtable;
 
-import com.linkedlist.LinkedList;
-//import com.linkedlist.LinkedList.Node;
+import com.linkedlist.DoublyLinkedList;
+import com.linkedlist.DoublyLinkedList.Node;
 
 public class HashTable {
-	private static LinkedList[] headsOfListOfLinkedLists = new LinkedList[10];
+	private static DoublyLinkedList[] hashTable = new DoublyLinkedList[10];
 	
 	static {
 		for(int i = 0; i < 10; i++) {
-			headsOfListOfLinkedLists[i] = new LinkedList();
+			hashTable[i] = new DoublyLinkedList();
 		}
 	}
 	
-	public void insert(int key) {
-		//division rule (key % size of headsOfListOfLinkedLists)
+	private int hash(int key) {
+		//division rule (key % size of hash table)
+		return (key % hashTable.length);
+	}
+	
+	public Node insert(int key) {
+		int index = hash(key);
+		
+		DoublyLinkedList ll = hashTable[index];
+		return ll.insert(key);
+	}
+	
+	public Node remove(int key) {
 		int index = key % 10;
 		
-		LinkedList ll = headsOfListOfLinkedLists[index];
-//		Node node = headsOfListOfLinkedLists[index].getHead();
-		ll.insert(key);
+		DoublyLinkedList ll = hashTable[index];
+		return ll.remove(key);
 	}
 	
 	public void display() {
-		for(int i = 0; i < headsOfListOfLinkedLists.length; i++) {
+		for(int i = 0; i < hashTable.length; i++) {
 			System.out.print(i + ": ");
-			headsOfListOfLinkedLists[i].display();
+			hashTable[i].display();
 			System.out.println();
 		}
 	}

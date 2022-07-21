@@ -1,0 +1,46 @@
+package com.main;
+
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+import com.bean.Employee;
+import com.bean.Project;
+import com.sort.SortByYoe;
+
+public class Main {
+
+	public static void main(String[] args) {
+//		Map<Employee, Project> ep = new HashMap<>();
+		TreeMap<Employee, Project> ep = new TreeMap<>(new SortByYoe());
+		
+		Employee e1 = new Employee(1, "hamza", 5);
+		Project p1 = new Project(101, "java");
+		
+		Employee e2 = new Employee(2, "patel", 4);
+		Project p2 = new Project(102, "python");
+
+//		Employee e3 = e1;
+		//since e1 and e3 are equal according to our logic (equals() in Employee.java), it overrides its project from java to sql
+		Employee e3 = new Employee(1, "hamza", 3);
+		Project p3 = new Project(103, "sql");
+//		
+		ep.put(e1, p1);
+		ep.put(e2, p2);
+		ep.put(e3, p3);
+//		
+//		if(e1 == e3) {
+//			System.out.println("e1 = e3");
+//		} else {
+//			System.out.println("e1 != e3");
+//		}
+		
+//		for(Employee key: ep.keySet()) {
+//			System.out.println(key + " : " + ep.get(key));
+//		}
+		
+		ep.forEach((key, value) -> System.out.println(key + " " + value));
+	}
+
+}

@@ -1,0 +1,9 @@
+package com.airport;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Airports {
+	Map<String, List<Airport>> airports = new HashMap<String, List<Airport>>();
+}

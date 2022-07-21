@@ -1,0 +1,40 @@
+package com.hashtable;
+
+import com.linkedlist.DoublyLinkedList;
+
+public class HashTable {
+	private static LinkedList[] hashTable = new LinkedList[10];
+	
+	static {
+		for(int i = 0; i < 10; i++) {
+			hashTable[i] = new LinkedList();
+		}
+	}
+	
+	private int hash(int key) {
+		//division rule (key % size of hash table)
+		return (key % hashTable.length);
+	}
+	
+	public Node insert(int key) {
+		int index = hash(key);
+		
+		LinkedList ll = hashTable[index];
+		return ll.insert(key);
+	}
+	
+	public Node remove(int key) {
+		int index = key % 10;
+		
+		LinkedList ll = hashTable[index];
+		return ll.remove(key);
+	}
+	
+	public void display() {
+		for(int i = 0; i < hashTable.length; i++) {
+			System.out.print(i + ": ");
+			hashTable[i].display();
+			System.out.println();
+		}
+	}
+}
