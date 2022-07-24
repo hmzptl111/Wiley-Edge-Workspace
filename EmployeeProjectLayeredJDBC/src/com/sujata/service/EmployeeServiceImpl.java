@@ -17,16 +17,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.getAllRecords();
 	}
 	
+//	@Override
+//	public List<Employee> getAllEmployeesByDepartment(String department) {
+//		List<Employee> employees = getAllEmployees();
+//		List<Employee> employeesInDepartment = new ArrayList<Employee>();
+//		for(Employee e: employees) {
+//			if(e.getEmpDepartment().equals(department)) {
+//				employeesInDepartment.add(e);
+//			}
+//		}
+//		return employeesInDepartment;
+//	}
+	
 	@Override
-	public List<Employee> getAllEmployeesByDepartment(String department) {
-		List<Employee> employees = getAllEmployees();
-		List<Employee> employeesInDepartment = new ArrayList<Employee>();
-		for(Employee e: employees) {
-			if(e.getEmpDepartment().equals(department)) {
-				employeesInDepartment.add(e);
-			}
-		}
-		return employeesInDepartment;
+	public List<Employee> getAllRecordsByField(String field, String value) {
+		return employeeDao.getAllRecordsByField(field, value);
 	}
 
 	@Override

@@ -11,5 +11,6 @@ public interface EmployeeService {
 	Employee searchEmployeeById(int employeeId);
 	EmployeePayslip generatePayslip(int employeeId);
 	boolean addEmployee(Employee employee);
-	List<Employee> getAllEmployeesByDepartment(String department);
+//	List<Employee> getAllEmployeesByDepartment(String department);
+	public List<Employee> getAllRecordsByField(String field, String value);
 }

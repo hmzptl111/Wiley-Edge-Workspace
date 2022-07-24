@@ -76,11 +76,19 @@ public class EmployeePresentationImpl implements EmployeePresentation {
 		case 5:
 			System.out.println("Department: ");
 			String department = scanner.next();
-			List<Employee> employeesInDepartment = employeeService.getAllEmployeesByDepartment(department);
+			List<Employee> employeesInDepartment = employeeService.getAllRecordsByField("department", department);
 			for(Employee e: employeesInDepartment) {
 				System.out.println(e);
 			}
 			break;
+//		case 5:
+//			System.out.println("Department: ");
+//			String department = scanner.next();
+//			List<Employee> employeesInDepartment = employeeService.getAllEmployeesByDepartment(department);
+//			for(Employee e: employeesInDepartment) {
+//				System.out.println(e);
+//			}
+//			break;
 		case 6:
 			System.out.println("Thanks for using Employee Management System");
 			System.exit(0);
