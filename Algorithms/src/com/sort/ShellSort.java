@@ -1,5 +1,15 @@
 package com.sort;
 
+/*
+ * Worst case O(n2):
+ * 
+ * Best case O(n*log n): 
+ *
+ * Average case O(n*log n):
+ * 
+ * Space complexity: O(log n)
+ */
+
 public class ShellSort extends Sort {
 	public ShellSort(int[] arr) {
 		super(arr);

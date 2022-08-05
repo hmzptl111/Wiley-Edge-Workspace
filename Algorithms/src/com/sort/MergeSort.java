@@ -1,5 +1,15 @@
 package com.sort;
 
+/*
+ * Worst case O(n*log n):
+ * 
+ * Best case O(n*log n): 
+ *
+ * Average case O(n*log n):
+ * 
+ * Space complexity: O(log n)
+ */
+
 public class MergeSort extends Sort {
 	public MergeSort(int[] arr) {
 		super(arr);
